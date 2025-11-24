@@ -1,0 +1,29 @@
+services:
+  ai-agno-agent:
+    container_name: ai-agno-agent-${ENV}
+    build:
+      context: .
+      dockerfile: docker/${ENV}.Dockerfile
+      tags:
+        - ai-agno-agent-${ENV}:latest
+      secrets:
+        - uv_index_gemfury_username
+    image: ${DOCKER_IMAGE_NAME:-ai-agno-agent:latest}
+    ports:
+      - "4021:8080"
+    env_file:
+      - .env
+
+    volumes:
+      - ./src:/app/src
+    networks:
+      - common
+    command: uv run fastapi dev src/main.py --host 0.0.0.0 --port 8080 --reload
+
+secrets:
+  uv_index_gemfury_username:
+    environment: UV_INDEX_GEMFURY_USERNAME
+
+networks:
+  common:
+    external: true

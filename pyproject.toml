@@ -1,0 +1,21 @@
+[project]
+name = "ai-agno-agent"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "agno>=2.3.2",
+    "fastapi[standard]>=0.121.3",
+    "litellm>=1.80.5",
+    "pydantic-settings>=2.12.0",
+    "odevo_ai>=0.27",
+    "braintrust>=0.3.8",
+]
+
+[tool.uv.sources]
+odevo_ai = { index = "gemfury" }
+
+[[tool.uv.index]]
+name = "gemfury"
+url = "https://repo.fury.io/odevo/"
