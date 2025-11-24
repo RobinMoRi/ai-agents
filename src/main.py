@@ -8,8 +8,8 @@ from odevo_ai.utils import (
     setup_uvicorn_logging,
 )
 
-from deps import get_settings
-from routes.agents import router as agents_router
+from src.deps import get_settings
+from src.routes.agents import router as agents_router
 
 logger = logging.getLogger(__name__)
 settings = get_settings()

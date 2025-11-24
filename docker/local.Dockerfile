@@ -2,7 +2,7 @@ FROM python:3.13-slim
 
 # TEMPLATE: Add any system dependencies your service needs
 # Example: RUN apt-get update && apt-get install -y package-name
-RUN apt-get update && apt-get install -y libmagic1
+RUN apt-get update && apt-get install -y libmagic1 build-essential
 
 # Install uv
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
@@ -15,6 +15,7 @@ RUN mkdir -p /app
 COPY ./pyproject.toml /app
 COPY ./uv.lock /app
 COPY ./src /app/src
+COPY ./evals /app/evals
 
 # Set working directory
 WORKDIR /app

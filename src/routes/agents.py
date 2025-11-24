@@ -3,7 +3,7 @@ from typing import Annotated
 from agno.agent import Agent
 from fastapi import APIRouter, Depends, Query
 
-from deps import get_agent
+from src.deps import get_agent
 
 router = APIRouter(prefix="/agents", tags=["Agents"])
 

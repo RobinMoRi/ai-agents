@@ -15,7 +15,7 @@ class Settings(BaseSettings):
     agent_id: str = "agent"
     agent_name: str = "Agent"
 
-    litellm_base_url: str = Field(default="http://host.docker.internal:4000/v1")
+    litellm_base_url: str = Field(default=...)
     litellm_key: str = Field(default=...)
     llm_model: str = Field(default=...)
     braintrust_api_key: str = Field(default=...)
