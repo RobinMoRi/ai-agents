@@ -16,9 +16,32 @@ services:
 
     volumes:
       - ./src:/app/src
+      - ./evals:/app/evals
     networks:
       - common
     command: uv run fastapi dev src/main.py --host 0.0.0.0 --port 8080 --reload
+
+  ai-agno--remote-eval:
+    container_name: ai-agno-remote-eval-${ENV}
+    build:
+      context: .
+      dockerfile: docker/${ENV}.Dockerfile
+      tags:
+        - ai-agno-agent-${ENV}:latest
+      secrets:
+        - uv_index_gemfury_username
+    image: ${DOCKER_IMAGE_NAME:-ai-agno-agent:latest}
+    ports:
+      - "8300:8300"
+    env_file:
+      - .env
+
+    volumes:
+      - ./src:/app/src
+      - ./evals:/app/evals
+    networks:
+      - common
+    command: uv run braintrust eval evals/eval_agent.py --dev --dev-host 0.0.0.0
 
 secrets:
   uv_index_gemfury_username:
